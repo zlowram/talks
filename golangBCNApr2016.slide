@@ -1,0 +1,117 @@
+Godan
+Golang Barcelona
+20 Apr 2016
+
+Sergi Martinez
+zlowram@gmail.com
+http://github.com/zlowram
+@zlowram_
+
+* What is Godan?
+
+Opensauce shodan-like tool to "discover services"
+
+- Modular
+- Scalable
+- Distributed
+- Written in Go
+
+* What is it for?
+
+Scan the Internet to collect information about devices connected to it, ideally 24/7.
+
+.image golangBCNApr2016/knockknock.jpg _ 600
+
+* Why did you do that?
+
+- Started as a pet project to learn Go.
+- Initially it was a non-scalable CLI tool.
+- It is *really* interesting to see what people leave exposed to the Internet (you'll see...)
+
+* No, really
+
+Full access to Shodan is paid, and it's not Opensauce :(
+
+And I'm catalan...
+
+.image golangBCNApr2016/savemoney.jpg
+
+* And that name..?
+
+Godan = Go + Shodan
+
+.image golangBCNApr2016/creativity.jpg _ 600
+
+* Now going serious again...
+
+.image golangBCNApr2016/arch.png _ 600
+
+* Server
+
+.image golangBCNApr2016/server.png _ 550 
+
+- Sends targets to the Broker
+- Allow communication with the UI API
+
+* Workers
+
+.image golangBCNApr2016/workers.png _ 350
+
+- Scan the targets and return the results to the Broker
+- Includes the code for the "service discovery"
+- Socks proxy support
+
+* Workers
+
+Service implementation: Modularity
+
+.code golangBCNApr2016/services.go
+
+* User interface
+
+.image golangBCNApr2016/ui.png _ 600
+
+UI API
+- Talks to the server via Rest API
+- Includes user management
+- Expose Rest API for interaction
+- Authentication with JWT
+
+WebUI
+- AngularJS
+- Bootstrap
+
+* User interface
+
+Authentication with JSON Web Tokens (JWT)
+- Completely stateless sessions: all the information is included within the token (claims)
+- Using JWS for signing and JWE for encryption (integrity + confidentiality)
+
+.code golangBCNApr2016/dissectedToken.code
+
+* User interface
+
+Go middleware for JWT
+
+.code golangBCNApr2016/jwtauth.go
+
+.link https://github.com/zlowram/zmiddlewares/
+
+* Now... it's demo time!
+
+.image golangBCNApr2016/showtime.gif _ 550
+
+* Work to be done
+
+- Finish the Web UI (user management)
+- Review the overall security of the tool
+- Change DB (need more scalability and query speed)
+- Scramble tasks (less prone to scan detections)
+- Allow choosing which services to use
+- A lot moar!
+
+* Contributing  
+
+- Feedback appreciated
+- Issues and Pull Requests are welcome!
+.link http://github.com/zlowram/godan-dist

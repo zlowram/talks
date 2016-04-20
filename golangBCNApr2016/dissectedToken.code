@@ -1,0 +1,8 @@
+// Format:
+base64(header).base64(payload).base64(signature)
+
+// Header:
+{ "alg": "HS256", "typ": "JWT" }
+
+// Payload:
+{ "sub": "1234567890", "name": "John Doe", "admin": true }
